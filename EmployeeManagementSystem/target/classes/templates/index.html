@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- This link help to removie the yellow line which states undefined attributes -->
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<!-- thymleaf attributes -->
+<head>
+<meta charset="UTF-8">
+<title>Employee Management System</title>
+<!-- Boostrap CSS library copied  -->
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+ crossorigin="anonymous">
+ 
+</head>
+<body>
+<!--alignment is not needed as we added container  (its not reflecting changes)-->
+<div class ="container">
+	<h1>Employee List</h1>
+	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+	<table border="1" class ="table table-striped table-responsive-md">
+		<thead>
+			<tr>
+				<th>Employee First Name</th>
+				<th>Employee Last Name</th>
+				<th>Employee Email Name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- listEmployee is from the  controller
+			th:each is iterator-->
+				<!--object reference(local object name) , collection key  -->
+				<tr th:each="employee : ${listEmployee}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.lastName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class ="btn btn-primary">Update</a></td>
+					<td> <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class ="btn btn-danger">Delete</a></td>
+				</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
